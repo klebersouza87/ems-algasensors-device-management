@@ -1,4 +1,4 @@
-package com.ems.algasensors.device.management;
+package com.ems.algasensors.device.management.common;
 
 import io.hypersistence.tsid.TSID;
 
