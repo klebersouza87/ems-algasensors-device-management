@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 public class Sensor {
-    /*JPA need an embeddable (SensorId) when using a customizable Id. In this case we will create a bigint field
+    /*JPA needs an embeddable (SensorId) when using a customizable Id. In this case we will create a bigint field
     * in database, and JPA will use TSIDToLongJPAAttributeConverter class to convert TSID to bigint.*/
     @Id
     @AttributeOverride(name = "value", column = @Column(name = "id", columnDefinition = "BIGINT"))
