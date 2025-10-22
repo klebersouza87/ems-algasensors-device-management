@@ -11,9 +11,6 @@ public class SensorMonitoringClientImpl implements SensorMonitoringClient {
 
     private final RestClient restClient;
 
-    @Value("${temperature-monitoring.base-url}")
-    private String baseUrl;
-
     /*RestClient.Builder already creates a RestClient with Jackson Serializable/Deserializable configuration.*/
     public SensorMonitoringClientImpl(RestClient.Builder restClientBuilder, @Value("${temperature-monitoring.base-url}") String baseUrl) {
         this.restClient = restClientBuilder.baseUrl(baseUrl).build();
