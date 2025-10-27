@@ -1,8 +1,8 @@
 package com.ems.algasensors.device.management.api.client.impl;
 
+import com.ems.algasensors.device.management.api.client.RestClientFactory;
 import com.ems.algasensors.device.management.api.client.SensorMonitoringClient;
 import io.hypersistence.tsid.TSID;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -11,9 +11,8 @@ public class SensorMonitoringClientImpl implements SensorMonitoringClient {
 
     private final RestClient restClient;
 
-    /*RestClient.Builder already creates a RestClient with Jackson Serializable/Deserializable configuration.*/
-    public SensorMonitoringClientImpl(RestClient.Builder restClientBuilder, @Value("${temperature-monitoring.base-url}") String baseUrl) {
-        this.restClient = restClientBuilder.baseUrl(baseUrl).build();
+    public SensorMonitoringClientImpl(RestClientFactory factory) {
+        this.restClient = factory.temperatureMonitoringRestClient();
     }
 
     @Override
