@@ -1,7 +1,9 @@
 package com.ems.algasensors.device.management.api.controller;
 
 import com.ems.algasensors.device.management.api.client.SensorMonitoringClient;
+import com.ems.algasensors.device.management.api.model.SensorDetailOutput;
 import com.ems.algasensors.device.management.api.model.SensorInput;
+import com.ems.algasensors.device.management.api.model.SensorMonitoringOutput;
 import com.ems.algasensors.device.management.api.model.SensorOutput;
 import com.ems.algasensors.device.management.common.IdGenerator;
 import com.ems.algasensors.device.management.domain.model.Sensor;
@@ -43,6 +45,17 @@ public class SensorController {
     public SensorOutput find(@PathVariable TSID sensorId) {
         Sensor sensor = getSensor(sensorId);
         return convertToSensorOutput(sensor);
+    }
+
+    @GetMapping("/{sensorId}/detail")
+    public SensorDetailOutput findWithDetail(@PathVariable TSID sensorId) {
+        Sensor sensor = getSensor(sensorId);
+        SensorOutput sensorOutput = convertToSensorOutput(sensor);
+        SensorMonitoringOutput sensorMonitoringOutput = sensorMonitoringClient.getDetail(sensorId);
+        return SensorDetailOutput.builder()
+                .sensor(sensorOutput)
+                .monitoring(sensorMonitoringOutput)
+                .build();
     }
 
     @PostMapping
